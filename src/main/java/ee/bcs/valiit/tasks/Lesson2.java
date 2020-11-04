@@ -1,15 +1,21 @@
 package ee.bcs.valiit.tasks;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.math.RoundingMode;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Scanner;
+import java.io.File;
 
 public class Lesson2 {
 
     public static void main(String[] args) {
         //test();
-        exercise5(1, 10);
+        //exercise5(900, 1000);
         //exercise7();
+        exercise8();
     }
 
     public static void exercise1() {
@@ -74,21 +80,16 @@ public class Lesson2 {
     }
 
     public static int sequenceLength(int n) {
-        //n = 10;
         int count = 0;
         while (n != 1) {
             count++;
-            //System.out.print(n + " ");
-            //System.out.println("Times looped: " + count);
             if (n % 2 != 0) {
                 n = 3 * n + 1;
             } else {
                 n = n / 2;
             }
         }
-        //System.out.println();
-        System.out.println("Count is: " + (count + 1));
-        return count;
+        return count + 1;
     }
 
     public static void exercise5(int i, int j) {
@@ -96,19 +97,38 @@ public class Lesson2 {
         //TODO 1 (tee alamfunktsioon), mis leiab 3n+1 sequenci pikkuse
         //kui on paaris, jaga 2-ga, kui on paaritu korruta 3+1-ga.
         //TODO 2 tee tsükkel mis leiab i -> j kõige suurema tsükkli pikkuse
-        sequenceLength(10);
-
+        int length = 0;
+        for (int k = i; k <= j; k++) {
+            if (length < sequenceLength(k)) {
+                length = sequenceLength(k);
+            }
+        }
+        System.out.println(i + " " + j + " " + length);
     }
 
-
-    //public static void exercise6 () {
-        /*
+    public static void exercise6() {
+            /*
             Kirjutada Java programm, mis loeb failist visits.txt sisse looduspargi külastajad erinevatel jaanuari päevadel ning
             a) sorteerib külastuspäevad külastajate arvu järgi kasvavalt ning prindib tulemuse konsoolile;
             b) prindib konsoolile päeva, mil külastajaid oli kõige rohkem.
-            Faili asukoht tuleb programmile ette anda käsurea parameetrina.
+            Faili asukoht tuleb programmile ette anda käsurea parameetrina.*/
 
-} */
+        String a = "2018-01-13, 436";
+        String[] b = a.split(", ");
+        System.out.println(b[0]);
+        System.out.println(b[1].trim());        //.trim() kustutab eest ja tagant kõik whitespace'id.
+        Visits visits = new Visits(b[0], Integer.parseInt(b[0]));
+        List<Visits> visit = new ArrayList<>();
+        visit.add(visits);
+        visit.sort(new Comparator<Visits>() {
+            @Override
+            public int compare(Visits o1, Visits o2) {
+                return 0;
+            }
+        });
+
+
+    }
 
     public static void exercise7() {
         // TODO arvuta kasutades BigDecimali 1.89 * ((394486820340 / 15 ) - 4 )
@@ -123,7 +143,7 @@ public class Lesson2 {
         System.out.println(y);
     }
 
-    //public static void exercise8() {
+    public static void exercise8() throws Exception {
         /*
         Failis nums.txt on üksteise all 150 60-kohalist numbrit.
 
@@ -133,7 +153,15 @@ public class Lesson2 {
         VASTUS:
         Õige summa: 77378062799264987173249634924670947389130820063105651135266574
          */
-    //}
+        File file = new File("nums.txt");
+        Scanner scanner = new Scanner(file);
+
+        BigInteger sum = BigInteger.valueOf(0);
+        while (scanner.hasNextLine()) {
+            BigInteger number = scanner.nextLine();
+        }
+
+    }
 
     public static void exercise9() {
         /* TODO
