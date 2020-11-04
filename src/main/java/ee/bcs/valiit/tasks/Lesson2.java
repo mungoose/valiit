@@ -11,7 +11,7 @@ import java.io.File;
 
 public class Lesson2 {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         //test();
         //exercise5(900, 1000);
         //exercise7();
@@ -156,10 +156,9 @@ public class Lesson2 {
         File file = new File("nums.txt");
         Scanner scanner = new Scanner(file);
 
-        BigInteger sum = BigInteger.valueOf(0);
-        while (scanner.hasNextLine()) {
-            BigInteger number = scanner.nextLine();
-        }
+        BigInteger big = scanner.nextBigInteger();
+        System.out.println(big);
+
 
     }
 
