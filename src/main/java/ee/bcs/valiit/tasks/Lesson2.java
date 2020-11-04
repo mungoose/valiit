@@ -2,7 +2,6 @@ package ee.bcs.valiit.tasks;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -153,13 +152,16 @@ public class Lesson2 {
         VASTUS:
         Õige summa: 77378062799264987173249634924670947389130820063105651135266574
          */
-        File file = new File("nums.txt");
+        File file = new File("/Users/mongoose/IdeaProjects/valiit3/src/main/resources/test_data/nums.txt");
         Scanner scanner = new Scanner(file);
 
-        BigInteger big = scanner.nextBigInteger();
-        System.out.println(big);
-
-
+        BigInteger big = BigInteger.valueOf(0);
+        big = scanner.nextBigInteger();
+        while (scanner.hasNextLine()) {
+            big = big.add(scanner.nextBigInteger());
+            //System.out.println("Sum after a cycle: " + big);
+        }
+        System.out.println("Final sum: " + big);
     }
 
     public static void exercise9() {
