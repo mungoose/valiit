@@ -12,9 +12,11 @@ public class Lesson2 {
 
     public static void main(String[] args) throws Exception {
         //test();
+        //exercise2(5);
         //exercise5(900, 1000);
         //exercise7();
-        exercise8();
+        //exercise8();
+        //exercise9();
     }
 
     public static void exercise1() {
@@ -34,18 +36,21 @@ public class Lesson2 {
         }
     }
 
-    public static void exercise2() {
+    public static List<Integer> exercise2(int in) {
         // TODO prindi välja x esimest paaris arvu
         // Näide:
         // Sisend 5
         // Väljund 2 4 6 8 10
-        Scanner scanner = new Scanner(System.in);
-        int in = scanner.nextInt();
+        //Scanner scanner = new Scanner(System.in);
+        //int in = scanner.nextInt();
+        List<Integer> resultList = new ArrayList<>();
         for (int i = 2; i < ((2 * in) + 1); i++) {
             if (i % 2 == 0) {
-                System.out.println(i);
+                //System.out.println(i);
+                resultList.add(i);
             }
         }
+        return resultList;
     }
 
     public static void exercise3(int x, int y) {
@@ -91,11 +96,14 @@ public class Lesson2 {
         return count + 1;
     }
 
-    public static void exercise5(int i, int j) {
+    public static List<Integer> exercise5(int i, int j) {
         // https://onlinejudge.org/index.php?option=onlinejudge&Itemid=8&page=show_problem&problem=36
         //TODO 1 (tee alamfunktsioon), mis leiab 3n+1 sequenci pikkuse
         //kui on paaris, jaga 2-ga, kui on paaritu korruta 3+1-ga.
         //TODO 2 tee tsükkel mis leiab i -> j kõige suurema tsükkli pikkuse
+        List<Integer> resultList = new ArrayList<>();
+        resultList.add(i);
+        resultList.add(j);
         int length = 0;
         for (int k = i; k <= j; k++) {
             if (length < sequenceLength(k)) {
@@ -103,6 +111,8 @@ public class Lesson2 {
             }
         }
         System.out.println(i + " " + j + " " + length);
+        resultList.add(length);
+        return resultList;
     }
 
     public static void exercise6() {
@@ -155,8 +165,7 @@ public class Lesson2 {
         File file = new File("/Users/mongoose/IdeaProjects/valiit3/src/main/resources/test_data/nums.txt");
         Scanner scanner = new Scanner(file);
 
-        BigInteger big = BigInteger.valueOf(0);
-        big = scanner.nextBigInteger();
+        BigInteger big = scanner.nextBigInteger();
         while (scanner.hasNextLine()) {
             big = big.add(scanner.nextBigInteger());
             //System.out.println("Sum after a cycle: " + big);
@@ -164,10 +173,23 @@ public class Lesson2 {
         System.out.println("Final sum: " + big);
     }
 
-    public static void exercise9() {
+    public static void exercise9() throws Exception {
         /* TODO
         Sama mis eelmises ülesandes aga ära kasuta BigInt ega BigDecimal klassi
          */
+        File file = new File("/Users/mongoose/IdeaProjects/valiit3/src/main/resources/test_data/nums.txt");
+        Scanner scanner = new Scanner(file);
+
+        List<Integer> numbers = new ArrayList<>();
+        int i = 0;
+        String line = scanner.nextLine();
+        System.out.println(line);
+        while (scanner.hasNextLine()) {
+            numbers.add(i);
+            System.out.println(numbers.get(i));
+            i++;
+        }
+
     }
 
     public static void test() {

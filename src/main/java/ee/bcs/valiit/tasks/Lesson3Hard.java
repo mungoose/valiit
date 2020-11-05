@@ -5,11 +5,12 @@ import java.util.Random;
 // Enne kui seda tegema hakkad tee ära Lesson 2 (välja arvatud ülesanded 6, 8, 9)
 public class Lesson3Hard {
     public static void main(String[] args) {
-
     }
 
     public static int evenFibonacci(int x){
         // TODO liida kokku kõik paaris fibonacci arvud kuni numbrini x
+        //        Lesson2.fibonacci()
+
         return 0;
     }
 
