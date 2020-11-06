@@ -57,12 +57,20 @@ public class Lesson1MathUtil {
 
     public static int min2(int a, int b) {
         // TODO tagasta a ja b väikseim väärtus
-        return Math.min(a, b);
+        if (a > b) {
+            return b;
+        } else {
+            return a;
+        }
     }
 
     public static int max2(int a, int b) {
         // TODO tagasta a ja b suurim väärtus
-        return Math.max(a, b);
+        if (a < b){
+            return b;
+        } else {
+            return a;
+        }
     }
 
     public static int abs(int a) {

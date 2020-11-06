@@ -2,9 +2,10 @@ package ee.bcs.valiit.tasks;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
-@RequestMapping("calculations")
+//@RequestMapping("calculations")
 @RestController
 public class TestController {
 
@@ -89,14 +90,63 @@ public class TestController {
     @GetMapping("dto_test")     //localhost:8080/calculations/dto_test?Brand=Yamaha&Model=MT07&AnyGood=true
     public Bikes getBikes(@RequestParam("Brand") String brand,
                           @RequestParam("Model") String model,
-                          @RequestParam("AnyGood") boolean anyGood){
+                          @RequestParam("AnyGood") boolean anyGood) {
 
         Bikes one = new Bikes(brand, model, anyGood);
-        //one.setBikeBrand(brand);
-        //one.setBikeModel(model);
-        //one.setAnyGood(anyGood);
         return one;
     }
 
+    @PostMapping("dto_test")     //localhost:8080/calculations/dto_test?Brand=Yamaha&Model=MT07&AnyGood=true
+    public List<Bikes> getBikesPost(@RequestParam("Brand") String brand,
+                                    @RequestParam(value = "Model", required = false) String model,
+                                    @RequestParam(value = "AnyGood", required = false) boolean anyGood,
+                                    @RequestBody Bikes bikesToo) {
+        List<Bikes> bikesTooList = new ArrayList<>();
+        Bikes first = new Bikes(brand, model, anyGood);
+        bikesTooList.add(bikesToo);
+        bikesTooList.add(first);
+        return bikesTooList;
+    }
+
+    List<Employee> employeeList = new ArrayList<>();
+
+    @PostMapping("employee")        //localhost:8080/employee
+    public List<Employee> postEmployee(@RequestBody Employee employee) {
+        employeeList.add(employee);
+        return employeeList;
+    }
+
+    @GetMapping("employee")
+    public List<Employee> getEmployeeList() {
+        return employeeList;
+    }
+
+    @GetMapping("employee/{id}")
+    public Employee getEmployee(@PathVariable("id") int id) {
+        return employeeList.get(id);
+    }
+
+    @PutMapping("employee/{id}")
+    public Employee replaceEmployee(@PathVariable("id") int id,
+                                    @RequestBody Employee employee) {
+        return employeeList.set(id, employee);
+    }
+
+    @DeleteMapping("employee/{id}")
+    public Employee removeEmployee(@PathVariable("id") int id) {
+        return employeeList.remove(id);
+    }
+
+
+
+
+
+ /*   @PostMapping("employee/{id}")
+    public List<Employee> getEmployees(@RequestBody Employee employee) {
+        List<Employee> employeeList = new ArrayList<>();
+        employeeList.add(employee);
+        return employeeList;
+    }
+*/
 
 }
