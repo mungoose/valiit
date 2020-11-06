@@ -17,6 +17,7 @@ public class Lesson2 {
         //exercise7();
         //exercise8();
         //exercise9();
+        //plusMinus(8);
     }
 
     public static void exercise1() {
@@ -206,5 +207,22 @@ public class Lesson2 {
         */
         System.out.println(a + "/" + b);
     }
+
+    public static List<Integer> plusMinus(int i){
+
+        List<Integer> outList = new ArrayList<>();
+        int out = 0;
+        for (int k = 0; k < i; k++){
+            out -=2;
+            if (k % 2 == 0){
+                //System.out.println(out);
+                outList.add(out);
+            } else {
+                //System.out.println(Math.abs(out));
+                outList.add(Math.abs(out));
+            }
+        } return outList;
+    }
+
 
 }
