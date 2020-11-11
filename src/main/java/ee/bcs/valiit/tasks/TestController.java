@@ -1,5 +1,8 @@
 package ee.bcs.valiit.tasks;
 
+import ee.bcs.valiit.tasks.tasks.Lesson2;
+import ee.bcs.valiit.tasks.tasks.Lesson3;
+import ee.bcs.valiit.tasks.tasks.Lesson3Hard;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -135,6 +138,11 @@ public class TestController {
     @DeleteMapping("employee/{id}")
     public Employee removeEmployee(@PathVariable("id") int id) {
         return employeeList.remove(id);
+    }
+
+    @GetMapping("morse")         //localhost:8080/morse?text=abcdefg
+    public List<String> textToMorse(@RequestParam("text") String text){
+        return Lesson3Hard.morseCode(text);
     }
 
 

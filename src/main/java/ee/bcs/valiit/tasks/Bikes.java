@@ -5,7 +5,7 @@ public class Bikes {
     private String bikeModel;
     private boolean anyGood;
 
-    public Bikes (String bikeBrand, String bikeModel, boolean anyGood){
+    public Bikes(String bikeBrand, String bikeModel, boolean anyGood) {
         this.bikeBrand = bikeBrand;
         this.bikeModel = bikeModel;
         this.anyGood = anyGood;

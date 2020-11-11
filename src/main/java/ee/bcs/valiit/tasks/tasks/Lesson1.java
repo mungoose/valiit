@@ -1,4 +1,4 @@
-package ee.bcs.valiit.tasks;
+package ee.bcs.valiit.tasks.tasks;
 
 public class Lesson1 {
 

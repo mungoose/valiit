@@ -1,4 +1,6 @@
-package ee.bcs.valiit.tasks;
+package ee.bcs.valiit.tasks.tasks;
+
+import ee.bcs.valiit.tasks.Visits;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -16,7 +18,7 @@ public class Lesson2 {
         //exercise5(900, 1000);
         //exercise7();
         //exercise8();
-        //exercise9();
+        exercise9();
         //plusMinus(8);
     }
 
@@ -181,16 +183,6 @@ public class Lesson2 {
         File file = new File("/Users/mongoose/IdeaProjects/valiit3/src/main/resources/test_data/nums.txt");
         Scanner scanner = new Scanner(file);
 
-        List<Integer> numbers = new ArrayList<>();
-        int i = 0;
-        String line = scanner.nextLine();
-        System.out.println(line);
-        while (scanner.hasNextLine()) {
-            numbers.add(i);
-            System.out.println(numbers.get(i));
-            i++;
-        }
-
     }
 
     public static void test() {
@@ -208,20 +200,21 @@ public class Lesson2 {
         System.out.println(a + "/" + b);
     }
 
-    public static List<Integer> plusMinus(int i){
+    public static List<Integer> plusMinus(int i) {
 
         List<Integer> outList = new ArrayList<>();
         int out = 0;
-        for (int k = 0; k < i; k++){
-            out -=2;
-            if (k % 2 == 0){
+        for (int k = 0; k < i; k++) {
+            out -= 2;
+            if (k % 2 == 0) {
                 //System.out.println(out);
                 outList.add(out);
             } else {
                 //System.out.println(Math.abs(out));
                 outList.add(Math.abs(out));
             }
-        } return outList;
+        }
+        return outList;
     }
 
 
