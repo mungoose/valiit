@@ -1,7 +1,7 @@
-package ee.bcs.valiit.tasks.controller;
+package ee.bcs.valiit.tasks.BankController2.controller;
 
-import ee.bcs.valiit.tasks.classes.History;
-import ee.bcs.valiit.tasks.service.BankService;
+import ee.bcs.valiit.tasks.BankController2.classes.History;
+import ee.bcs.valiit.tasks.BankController2.service.BankService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,13 +19,16 @@ public class BankController2 {
     private BankService bankService;
     private NamedParameterJdbcTemplate jdbcTemplate;
 
+
     // Add client with first name and last name.
     // Postgre will assign unique id which will be used as client ID.
     @PostMapping("addClient")
-    public void addClient(String firstName, String lastName) {
+    public void addClient(String firstName, String lastName, int id, String accountNr) {
         bankService.addClient(firstName, lastName);
+        bankService.createAccount(id, accountNr);
     }
     // localhost:8080/Bank2/addClient?firstName=John&lastName=Smith
+    // localhost:8080/Bank2/addClient?firstName=John&lastName=Smith&id=8&accountNr=EE22104
 
 
     // Create account by providing client ID and account number

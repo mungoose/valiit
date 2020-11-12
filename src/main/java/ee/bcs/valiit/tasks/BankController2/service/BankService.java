@@ -1,9 +1,9 @@
-package ee.bcs.valiit.tasks.service;
+package ee.bcs.valiit.tasks.BankController2.service;
 
-import ee.bcs.valiit.tasks.classes.History;
-import ee.bcs.valiit.tasks.repository.BankAccountRepository;
-import ee.bcs.valiit.tasks.repository.BankClientRepository;
-import ee.bcs.valiit.tasks.repository.BankHistoryRepository;
+import ee.bcs.valiit.tasks.BankController2.classes.History;
+import ee.bcs.valiit.tasks.BankController2.repository.BankAccountRepository;
+import ee.bcs.valiit.tasks.BankController2.repository.BankClientRepository;
+import ee.bcs.valiit.tasks.BankController2.repository.BankHistoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +30,7 @@ public class BankService {
         // Create account with initial balance 0
         bankAccountRepository.createAccount(id, accountNr);
         // Add to bank history with initial balance 0
-        bankAccountRepository.addToHistory(accountNr, BigDecimal.ZERO);
+        bankAccountRepository.addToHistoryInitial(accountNr, BigDecimal.ZERO, id);
     }
 
     // Add money to an account

@@ -40,6 +40,7 @@
             <column name="account_nr" type="text">
                 <constraints nullable="false" primaryKey="false" unique="false"/>
             </column>
+
             <column name="transaction" type="numeric">
                 <constraints nullable="false" primaryKey="false" unique="false"/>
             </column>

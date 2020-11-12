@@ -1,4 +1,4 @@
-package ee.bcs.valiit.tasks.repository;
+package ee.bcs.valiit.tasks.BankController2.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;

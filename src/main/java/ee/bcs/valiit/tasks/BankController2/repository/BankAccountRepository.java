@@ -1,11 +1,10 @@
-package ee.bcs.valiit.tasks.repository;
+package ee.bcs.valiit.tasks.BankController2.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,9 +14,8 @@ public class BankAccountRepository {
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
 
-    // Add an account
+    // Create an account by defining account number, attach client id, set initial balance of 0
     public void createAccount(int id, String accountNr) {
-        // Create an account by defining account number, attach client id, set initial balance of 0
         String sql = "INSERT INTO client_account (account_nr, client_id, balance) VALUES (:value1, :value2, :value3)";
         Map<String, Object> accountMap = new HashMap<>();
         BigDecimal zero = BigDecimal.ZERO;
@@ -27,8 +25,8 @@ public class BankAccountRepository {
         jdbcTemplate.update(sql, accountMap);
     }
 
+    // Add account number, transaction and client ID to history
     public void addToHistory(String accountNr, BigDecimal transaction) {
-        // Add created account with balance of 0 to bank history
         String sql = "INSERT INTO bank_history (account_nr, transaction, client_id) VALUES (:value1, :value2, :value3)";
         Map<String, Object> addToHistoryMap = new HashMap<>();
         addToHistoryMap.put("value1", accountNr);
@@ -37,14 +35,23 @@ public class BankAccountRepository {
         jdbcTemplate.update(sql, addToHistoryMap);
     }
 
+    public void addToHistoryInitial(String accountNr, BigDecimal transaction, int id) {
+        String sql = "INSERT INTO bank_history (account_nr, transaction, client_id) VALUES (:value1, :value2, :value3)";
+        Map<String, Object> addToHistoryMap = new HashMap<>();
+        addToHistoryMap.put("value1", accountNr);
+        addToHistoryMap.put("value2", transaction);
+        addToHistoryMap.put("value3", id);
+        jdbcTemplate.update(sql, addToHistoryMap);
+    }
+    // Get account balance by account number
     public BigDecimal getBalance(String accountNr) {
-        // Get initial balance
-        String sql = "SELECT balance FROM client_account WHERE account_nr = (:value1)";
+        String sql = "SELECT balance FROM client_account WHERE account_nr = (:value)";
         Map<String, Object> getBalanceMap = new HashMap<>();
-        getBalanceMap.put("value1", accountNr);
+        getBalanceMap.put("value", accountNr);
         return jdbcTemplate.queryForObject(sql, getBalanceMap, BigDecimal.class);
     }
 
+    // Set balance by account number and sum
     public void setBalance(String accountNr, BigDecimal sum) {
         String sql = "UPDATE client_account SET balance = (:value1) WHERE account_nr = (:value2)";
         Map<String, Object> setBalanceMap = new HashMap<>();
@@ -53,9 +60,10 @@ public class BankAccountRepository {
         jdbcTemplate.update(sql, setBalanceMap);
     }
 
+    // Get client ID by account number
     public int getClientId(String accountNr) {
         String sql = "SELECT client_id FROM client_account WHERE account_nr = (:value)";
-        Map<String, Object> getClientIdMap = new HashMap<>();
+        Map<String, String> getClientIdMap = new HashMap<>();
         getClientIdMap.put("value", accountNr);
         return jdbcTemplate.queryForObject(sql, getClientIdMap, int.class);
     }

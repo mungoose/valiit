@@ -1,4 +1,4 @@
-package ee.bcs.valiit.tasks.classes;
+package ee.bcs.valiit.tasks.BankController2.classes;
 
 import java.math.BigDecimal;
 

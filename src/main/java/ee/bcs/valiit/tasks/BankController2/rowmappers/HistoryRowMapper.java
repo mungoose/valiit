@@ -1,6 +1,6 @@
-package ee.bcs.valiit.tasks.rowmappers;
+package ee.bcs.valiit.tasks.BankController2.rowmappers;
 
-import ee.bcs.valiit.tasks.classes.History;
+import ee.bcs.valiit.tasks.BankController2.classes.History;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
