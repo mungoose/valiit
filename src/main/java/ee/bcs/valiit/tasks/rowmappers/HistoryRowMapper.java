@@ -1,5 +1,6 @@
-package ee.bcs.valiit.tasks;
+package ee.bcs.valiit.tasks.rowmappers;
 
+import ee.bcs.valiit.tasks.classes.History;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;

@@ -13,6 +13,7 @@ public class BankClientRepository {
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
 
+    // Create client by providing first name and last name
     public void addClient(String firstName, String lastName) {
         String sql = "INSERT INTO bank_client (first_name, last_name) VALUES (:first_name, :last_name)";
         Map<String, String> clientMap = new HashMap<>();

@@ -1,15 +1,13 @@
 package ee.bcs.valiit.tasks.service;
 
-import ee.bcs.valiit.tasks.History;
+import ee.bcs.valiit.tasks.classes.History;
 import ee.bcs.valiit.tasks.repository.BankAccountRepository;
 import ee.bcs.valiit.tasks.repository.BankClientRepository;
 import ee.bcs.valiit.tasks.repository.BankHistoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.List;
 
 @Service
@@ -30,7 +28,7 @@ public class BankService {
     // Add an account
     public void createAccount(int id, String accountNr) {
         // Create account with initial balance 0
-        bankAccountRepository.createAccount(id, accountNr, BigDecimal.ZERO);
+        bankAccountRepository.createAccount(id, accountNr);
         // Add to bank history with initial balance 0
         bankAccountRepository.addToHistory(accountNr, BigDecimal.ZERO);
     }
@@ -75,7 +73,9 @@ public class BankService {
         // Get balance for toAccount
         BigDecimal balanceTo = bankAccountRepository.getBalance(toAccount);
 
-        // Check if sufficients funds are present on fromAccount
+        // Make sure balanceFrom is not null
+        assert balanceFrom != null;
+        // Check if sufficient funds are present on fromAccount
         if (balanceFrom.compareTo(money) >= 0) {
 
             // Subtract sum from fromAccount and update balance
@@ -90,8 +90,18 @@ public class BankService {
         }
     }
 
-    // Get transaction history by id
+    // Get transaction history
     public List<History> getHistory() {
         return bankHistoryRepository.getHistory();
+    }
+
+    // Get transaction history by account nr
+    public List<History> getHistoryByAccount(String accountNr){
+        return bankHistoryRepository.getHistoryByAccount(accountNr);
+    }
+
+    // Get transaction history by client ID
+    public List<History> getHistoryById(int id){
+        return bankHistoryRepository.getHistoryById(id);
     }
 }

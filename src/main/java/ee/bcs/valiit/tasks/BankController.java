@@ -1,4 +1,4 @@
-package ee.bcs.valiit.tasks.controller;
+package ee.bcs.valiit.tasks;
 
 import ee.bcs.valiit.tasks.tasks.Account2;
 import org.springframework.web.bind.annotation.*;

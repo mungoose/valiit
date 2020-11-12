@@ -16,10 +16,11 @@ public class BankAccountRepository {
     private NamedParameterJdbcTemplate jdbcTemplate;
 
     // Add an account
-    public void createAccount(int id, String accountNr, BigDecimal zero) {
+    public void createAccount(int id, String accountNr) {
         // Create an account by defining account number, attach client id, set initial balance of 0
         String sql = "INSERT INTO client_account (account_nr, client_id, balance) VALUES (:value1, :value2, :value3)";
         Map<String, Object> accountMap = new HashMap<>();
+        BigDecimal zero = BigDecimal.ZERO;
         accountMap.put("value1", accountNr);
         accountMap.put("value2", id);
         accountMap.put("value3", zero);
@@ -45,17 +46,17 @@ public class BankAccountRepository {
     }
 
     public void setBalance(String accountNr, BigDecimal sum) {
-        String sql2 = "UPDATE client_account SET balance = (:value1) WHERE account_nr = (:value2)";
+        String sql = "UPDATE client_account SET balance = (:value1) WHERE account_nr = (:value2)";
         Map<String, Object> setBalanceMap = new HashMap<>();
         setBalanceMap.put("value1", sum);
         setBalanceMap.put("value2", accountNr);
-        jdbcTemplate.update(sql2, setBalanceMap);
+        jdbcTemplate.update(sql, setBalanceMap);
     }
 
     public int getClientId(String accountNr) {
-        String sql3 = "SELECT client_id FROM client_account WHERE account_nr = (:value)";
+        String sql = "SELECT client_id FROM client_account WHERE account_nr = (:value)";
         Map<String, Object> getClientIdMap = new HashMap<>();
         getClientIdMap.put("value", accountNr);
-        return jdbcTemplate.queryForObject(sql3, getClientIdMap, int.class);
+        return jdbcTemplate.queryForObject(sql, getClientIdMap, int.class);
     }
 }
