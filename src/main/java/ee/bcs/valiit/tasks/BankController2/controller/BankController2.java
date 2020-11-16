@@ -1,6 +1,8 @@
 package ee.bcs.valiit.tasks.BankController2.controller;
 
+import ee.bcs.valiit.tasks.BankController2.classes.BankClient;
 import ee.bcs.valiit.tasks.BankController2.classes.History;
+import ee.bcs.valiit.tasks.BankController2.repository.BankClientRepository;
 import ee.bcs.valiit.tasks.BankController2.service.BankService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -17,19 +19,25 @@ import java.util.List;
 public class BankController2 {
     @Autowired
     private BankService bankService;
-    private NamedParameterJdbcTemplate jdbcTemplate;
+    @Autowired
+    private BankClientRepository bankClientRepository;
 
 
-    // Add client with first name and last name.
-    // Postgre will assign unique id which will be used as client ID.
-    @PostMapping("addClient")
-    public void addClient(String firstName, String lastName, int id, String accountNr) {
-        bankService.addClient(firstName, lastName);
-        bankService.createAccount(id, accountNr);
+    // Add client with first name and last name and auto id
+    @PostMapping("addClient2")
+    public BankClient addClient2(String firstName, String lastName){
+        BankClient saveClient = new BankClient(firstName, lastName);
+        return bankClientRepository.save(saveClient);
     }
-    // localhost:8080/Bank2/addClient?firstName=John&lastName=Smith
-    // localhost:8080/Bank2/addClient?firstName=John&lastName=Smith&id=8&accountNr=EE22104
+    // localhost:8080/Bank2/addClient2?firstName=John&lastName=Smith
 
+
+
+    @GetMapping("getClientAccount")
+    public List<History> getClientAccount(int id){
+        return bankService.getAccountById(id);
+    }
+    // localhost:8080/Bank2/getClientAccount?id=2
 
     // Create account by providing client ID and account number
     @PostMapping("createAccount")
@@ -49,7 +57,7 @@ public class BankController2 {
 
     // Withdraw funds from an account by providing account number and withdraw sum
     // Will ignore function if balance is smaller than sum
-    @PostMapping("withdraw")
+    @GetMapping("withdraw")
     public void withdraw(String accountNr, BigDecimal out) {
         bankService.withdraw(accountNr, out);
     }
@@ -58,7 +66,7 @@ public class BankController2 {
 
     // Transfer money between accounts by providing from and to accounts and a sum
     // Will ignore function if balance of from account is smaller than money
-    @PostMapping("transfer")
+    @GetMapping("transfer")
     public void transfer(String fromAccount, String toAccount, BigDecimal money) {
         bankService.transfer(fromAccount, toAccount, money);
     }
@@ -88,6 +96,4 @@ public class BankController2 {
     }
     // localhost:8080/Bank2/getHistoryById?id=18
 }
-
-
 

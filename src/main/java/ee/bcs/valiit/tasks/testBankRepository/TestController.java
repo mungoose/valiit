@@ -1,5 +1,6 @@
-package ee.bcs.valiit.tasks.BankController2.TestBankRepository;
+package ee.bcs.valiit.tasks.testBankRepository;
 
+import ee.bcs.valiit.tasks.BankController2.classes.BankClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;

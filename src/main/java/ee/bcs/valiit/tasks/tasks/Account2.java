@@ -1,7 +1,7 @@
 package ee.bcs.valiit.tasks.tasks;
 
 
-import ee.bcs.valiit.tasks.History;
+import ee.bcs.valiit.tasks.BankController2.classes.History;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

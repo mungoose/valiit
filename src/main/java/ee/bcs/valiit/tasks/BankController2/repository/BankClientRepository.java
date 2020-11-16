@@ -1,24 +1,10 @@
 package ee.bcs.valiit.tasks.BankController2.repository;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import ee.bcs.valiit.tasks.BankController2.classes.BankClient;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.HashMap;
-import java.util.Map;
-
 @Repository
-public class BankClientRepository {
+public interface BankClientRepository extends JpaRepository<BankClient, Integer> {
 
-    @Autowired
-    private NamedParameterJdbcTemplate jdbcTemplate;
-
-    // Create client by providing first name and last name
-    public void addClient(String firstName, String lastName) {
-        String sql = "INSERT INTO bank_client (first_name, last_name) VALUES (:first_name, :last_name)";
-        Map<String, String> clientMap = new HashMap<>();
-        clientMap.put("first_name", firstName);
-        clientMap.put("last_name", lastName);
-        jdbcTemplate.update(sql, clientMap);
-    }
 }

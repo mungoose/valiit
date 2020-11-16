@@ -8,6 +8,10 @@ public class Client {
     private String lastName;
     private List<Account> accounts = new ArrayList<>();
 
+    public Client(){
+
+    }
+
     public Client(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;

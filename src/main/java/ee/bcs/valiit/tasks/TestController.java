@@ -145,6 +145,10 @@ public class TestController {
         return Lesson3Hard.morseCode(text);
     }
 
+    public List<String> randomTest(){
+        List<String> thisIsATest = new ArrayList<>();
+        return thisIsATest;
+    }
 
 
 

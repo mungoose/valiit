@@ -1,4 +1,4 @@
-package ee.bcs.valiit.tasks.BankController2.TestBankRepository;
+package ee.bcs.valiit.tasks.BankController2.classes;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,8 +8,8 @@ import javax.persistence.Id;
 @Entity
 public class BankClient {
 
-    @Id                                                  // See @ käib järgmise reaga kaasas
-    @GeneratedValue(strategy = GenerationType.IDENTITY)  // Ütleb, et id on auto-incremented. Kehtib kuni ";"
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String firstName;
     private String lastName;

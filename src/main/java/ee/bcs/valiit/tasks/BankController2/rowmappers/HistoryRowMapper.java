@@ -13,7 +13,8 @@ public class HistoryRowMapper implements RowMapper<History> {
         History history = new History();
         history.setId(resultSet.getInt("id"));
         history.setAccountNr(resultSet.getString("account_nr"));
-        history.setTransaction(resultSet.getBigDecimal("transaction"));
+        history.setSumIn(resultSet.getBigDecimal("sum_in"));
+        history.getSumOut(resultSet.getBigDecimal("sum_out"));
         history.setClientId(resultSet.getInt("client_id"));
         return history;
     }

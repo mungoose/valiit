@@ -38,4 +38,11 @@ public class BankHistoryRepository {
         return jdbcTemplate.query(sql, historyMap, new HistoryRowMapper());
     }
 
+    public List<History> getAccountNrByID(int id) {
+        String sql = "SELECT account_nr FROM bank_history WHERE client_id = :value1";
+        Map<String, Object> accountNr = new HashMap();
+        accountNr.put("value", id);
+        return jdbcTemplate.query(sql, accountNr, new HistoryRowMapper());
+    }
+
 }

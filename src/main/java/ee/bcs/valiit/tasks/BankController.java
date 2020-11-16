@@ -24,6 +24,7 @@ public class BankController {
     //List<Account> accountList = new ArrayList<>();
     private Map<String, Account2> accounts = new HashMap<>();
 
+
     @PostMapping("account")     // localhost:8080/Bank/account
     public void createAccount(@RequestBody String accountNr) {
         accounts.put(accountNr, new Account2(accountNr));

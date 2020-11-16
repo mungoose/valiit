@@ -1,32 +1,17 @@
 package ee.bcs.valiit.tasks.BankController2.classes;
 
+import liquibase.pro.packaged.B;
+
 import java.math.BigDecimal;
 
 public class History {
     private int id;
     private String accountNr;
-    private BigDecimal transaction;
+    private BigDecimal sumIn;
+    private BigDecimal sumOut;
     private int clientId;
 
     public History() {
-    }
-
-    public History(int id, String accountNr) {
-        this.id = id;
-        this.accountNr = accountNr;
-    }
-
-    public History(int id, String accountNr, BigDecimal transaction) {
-        this.id = id;
-        this.accountNr = accountNr;
-        this.transaction = transaction;
-    }
-
-    public History(int id, String accountNr, BigDecimal transaction, int clientId) {
-        this.id = id;
-        this.accountNr = accountNr;
-        this.transaction = transaction;
-        this.clientId = clientId;
     }
 
     public int getId() {
@@ -45,12 +30,20 @@ public class History {
         this.accountNr = accountNr;
     }
 
-    public BigDecimal getTransaction() {
-        return transaction;
+    public BigDecimal getSumIn() {
+        return sumIn;
     }
 
-    public void setTransaction(BigDecimal transaction) {
-        this.transaction = transaction;
+    public void setSumIn(BigDecimal sumIn) {
+        this.sumIn = sumIn;
+    }
+
+    public BigDecimal getSumOut(BigDecimal sum_out) {
+        return sumOut;
+    }
+
+    public void setSumOut(BigDecimal sumOut) {
+        this.sumOut = sumOut;
     }
 
     public int getClientId() {
@@ -58,6 +51,26 @@ public class History {
     }
 
     public void setClientId(int clientId) {
+        this.clientId = clientId;
+    }
+
+    public History(int id, String accountNr) {
+        this.id = id;
+        this.accountNr = accountNr;
+    }
+
+    public History(int id, String accountNr, BigDecimal sumIn, BigDecimal sumOut) {
+        this.id = id;
+        this.accountNr = accountNr;
+        this.sumIn = sumIn;
+        this.sumOut = sumOut;
+    }
+
+    public History(int id, String accountNr, BigDecimal sumIn, BigDecimal sumOut, int clientId) {
+        this.id = id;
+        this.accountNr = accountNr;
+        this.sumIn = sumIn;
+        this.sumOut = sumOut;
         this.clientId = clientId;
     }
 
