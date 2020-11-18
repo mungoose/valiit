@@ -6,36 +6,64 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<h1>Bank of GiveUsYourMoney</h1>
+<h1>Bank of the United States of Estonia</h1>
 <h2>Your account information</h2>
 <div class="add">
-        <h2 id="clientName">Your name here</h2>
-        <br>
-        <br>
-        <h2>Your current balance is:</h2>
-        <h1 id="balance">1200</h1><h3> euros </h3>
+    <h3>Enter your client id:</h3>
+    <input type="text" id="clientIdInput"><br>
+    <button id="enterClientId">Submit</button>
+    <h2 id="clientName">Welcome: [Client name here]</h2>
+    <br>
+    <h2>Your current balance is:</h2>
+    <h1 id="balance">[BALANCE HERE]</h1>
+    <h3> euros </h3>
 </div>
 <div id="history" class="add">
     <h2>Account history:</h2>
-    <table id="historyTable" border="1"  cellpadding="10px" cellspacing="5px">
+    <table id="historyTable" border="1" cellpadding="10px" cellspacing="5px">
         <tr>
             <td>Account nr</td>
             <td>In</td>
             <td>Out</td>
             <td>Comment</td>
         </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-
-        </tr>
-
     </table>
 </div>
 <script>
-
+    let myButton = document.getElementById("enterClientId");
+    let clientId = document.getElementById("clientIdInput");
+    myButton.onclick = function getHistory () {
+        return fetch("localhost:8080/Bank2/getHistoryById", {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(clientId)
+        }).then(
+            function (result) {                  // result on see, mis tagasi tuleb fetch-iga
+                console.log(result);
+                return result.json();           // mine body-sse ja tagasta body sisu objektina
+            }                                   // kogu see function asendatava .then (result => result.json())
+        ).then(
+            function (result) {                  // See annab info välja, siin saab muuta htmli ja panna sinna asju sisse.
+                console.log(result);
+                let table = document.getElementById("historyTable");
+                for (let i = 0; i < result.length; i++) {
+                    let newRow = document.createElement("tr");
+                    let newCell1 = document.createElement("td");
+                    newCell1.innerText = result[i].accountNr
+                    newRow.append(newCell1);
+                    let newCell2 = document.createElement("td");
+                    newCell2.innerText = result[i].sumIn;
+                    newRow.append(newCell2);
+                    let newCell3 = document.createElement("td");
+                    newCell3.innerText = result[i].sumOut;
+                    newRow.append(newCell3);
+                    let newCell4 = document.createElement("td");
+                    newCell4.innerText = " - ";
+                    table.append(newRow)
+                }
+            }
+        );
+    }
 </script>
 </body>
 </html>
