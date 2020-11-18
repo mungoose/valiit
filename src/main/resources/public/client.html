@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bank of GUYM</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h1>Bank of GiveUsYourMoney</h1>
+<h2>Become a client</h2>
+<div id="add">
+    <form action="index.html" method="post">
+        <h2>Insert name</h2>
+        <input type="text" id="firstName" required placeholder="First name *">
+        <br>
+        <input type="text" id="lastName" required placeholder="Last name *">
+        <br>
+        <button id="addAccountButton">Add account</button>
+        <br>
+        <p>* Required field</p>
+    </form>
+</div>
+<div id="added">
+    <h2>Congratulations!<br>Your account was added.</h2>
+    <h3>Your unique ID is:</h3>
+    <h2 id="clientId">ID here</h2>
+</div>
+<script>
+    let myButton = document.getElementById("addAccountButton");
+    myButton.onclick = function () {
+
+    }
+</script>
+</body>
+</html>

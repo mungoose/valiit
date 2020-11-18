@@ -1,0 +1,107 @@
+h1, h2 {
+    text-align: center;
+    color: whitesmoke;
+}
+
+h2, h3, h4, a, p {
+    color: wheat;
+}
+
+ul, ol {
+    display: block;
+    color: ghostwhite;
+}
+
+dl {
+    color: ghostwhite;
+}
+
+input {
+    margin-bottom: 10px;
+    text-align: center;
+    width: 200px;
+    padding: 5px;
+    border-radius: 50px;
+}
+
+.add {
+    display: block;
+    text-align: center;
+    max-width: 35%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 50px;
+    border: 1px solid floralwhite;
+    padding: 50px 25px;
+    border-radius: 150px;
+}
+
+#historyTable {
+    background: whitesmoke;
+    color: black;
+    margin-left: 120px;
+    border-radius: 5px;
+}
+
+#added {
+    display: block;
+    text-align: center;
+    max-width: 35%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 50px;
+    border: 1px solid floralwhite;
+    padding: 50px 25px;
+    border-radius: 150px;
+}
+
+button {
+    border-radius: 10px;
+    background: dimgrey;
+    font-size: 16px;
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+select {
+    border-radius: 20px;
+    background: white;
+    font-size: 16px;
+    color: dimgrey;
+    padding: 2px 50px;
+}
+
+img {
+    display: block;
+    max-width: 50%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    border: 5px solid floralwhite;
+    border-radius: 50px;
+    box-shadow: 0 4px 8px 0 #3D3D3D, 0 6px 20px 0 #3D3D3D;
+}
+
+body {
+    background: black;
+}
+
+div {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    align-content: center;
+    color: ghostwhite;
+    padding: 2px;
+}
+
+.myTable {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+body {
+    text-align: center;
+}

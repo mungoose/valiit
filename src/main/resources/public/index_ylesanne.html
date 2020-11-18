@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <br>
+    <input type="number" id="takeNumber" placeholder="how many rows">
+    <input type="number" id="takeNumberToo" placeholder="how many columns">
+    <br>
+    <br>
+    <button id="myButton">Generate multiplication table!</button>
+    <br>
+    <table id="myTable" border="1">
+
+
+    </table>
+</div>
+<script>
+    let myButton = document.getElementById("myButton");
+    myButton.onclick = function () {
+        let myNumber = document.getElementById("takeNumber").value;
+        let myNumberToo = document.getElementById("takeNumberToo").value;
+        let myTable = document.getElementById("myTable");
+        for (let nr2 = 1; nr2 <= myNumberToo; nr2++) {
+            let rowElement = document.createElement("tr");
+            for (let nr = 1; nr <= myNumber; nr++) {
+                let cellElement = document.createElement("td");
+                cellElement.innerText = nr * nr2;
+                rowElement.append(cellElement);
+            }
+            myTable.append(rowElement);
+        }
+    }
+    // let myButton = document.getElementById("myButton");
+    // myButton.onclick = function () {
+    //     let myTable = document.getElementById("myTable");
+    //     let rowElement = document.createElement("tr");
+    //     let cellElement = document.createElement("td");
+    //     rowElement.append(cellElement);
+    //     cellElement.innerText = "testing";
+    //     myTable.append(rowElement);
+    // }
+</script>
+</body>
+</html>
