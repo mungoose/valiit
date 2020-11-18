@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Account information</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h1>Bank of the United States of Estonia</h1>
+<h2 class="warning">For internal use only!</h2>
+<div class="add">
+    <h2>View bank history</h2>
+    <br>
+    <button id="getHistoryButton">Get history</button>
+</div>
+<div id="bankHistoryInfo" class="add">
+    <h2>Bank history</h2>
+    <table id="bankHistoryTable" border="1" cellpadding="10px" cellspacing="5px">
+        <tr>
+            <td>Account id</td>
+            <td>Account nr</td>
+            <td>Sum in</td>
+            <td>Sum out</td>
+            <td>Client id</td>
+        </tr>
+    </table>
+</div>
+<script>
+    let myButton = document.getElementById("getHistoryButton");
+    myButton.onclick = function () {
+        fetch("http://localhost:8080/Bank2/getHistory").then(
+            function (result){                  // result on see, mis tagasi tuleb fetch-iga
+                console.log(result);
+                return result.json();           // mine body-sse ja tagasta body sisu objektina
+                //return result.text();         // tagastiab body stringinga
+            }                                   // kogu see function asendatava .then (result => result.json())
+        ).then(
+            function (result){                  // See annab info välja, siin saab muuta htmli ja panna sinna asju sisse.
+                console.log(result);
+                let table = document.getElementById("bankHistoryTable");
+                for (let i = 0; i < result.length; i++){
+                    let newRow = document.createElement("tr");
+                    let newCell1 = document.createElement("td");
+                    newCell1.innerText = result[i].id
+                    newRow.append(newCell1);
+                    let newCell2 = document.createElement("td");
+                    newCell2.innerText = result[i].accountNr;
+                    newRow.append(newCell2);
+                    let newCell3 = document.createElement("td");
+                    newCell3.innerText = result[i].sumIn;
+                    newRow.append(newCell3);
+                    let newCell4 = document.createElement("td");
+                    newCell4.innerText = result[i].sumOut;
+                    newRow.append(newCell4);
+                    let newCell5 = document.createElement("td");
+                    newCell5.innerText = result[i].clientId;
+                    newRow.append(newCell5);
+                    table.append(newRow)
+                }
+            }
+        );
+    }
+</script>
+</body>
+</html>

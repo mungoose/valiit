@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Bank of GUYM</title>
+    <title>Bank of USE</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<h1>Bank of GiveUsYourMoney</h1>
+<h1>Bank of the United States of Estonia</h1>
 <h2>Become a client</h2>
-<div id="add">
+<div class="add">
     <form action="index.html" method="post">
         <h2>Insert name</h2>
         <input type="text" id="firstName" required placeholder="First name *">
@@ -23,12 +23,28 @@
 <div id="added">
     <h2>Congratulations!<br>Your account was added.</h2>
     <h3>Your unique ID is:</h3>
-    <h2 id="clientId">ID here</h2>
+    <h1 id="clientId">ID here</h1>
 </div>
 <script>
     let myButton = document.getElementById("addAccountButton");
     myButton.onclick = function () {
-
+        let firstName = document.getElementById("firstName");
+        let lastName = document.getElementById("lastName");
+        let a = fetch("/Bank2/getHistory");
+        console.log(a);
+        let b = a.then(
+            function (result){      // result on see, mis tagasi tuleb fetch-iga
+                console.log(result)
+                //result.json();      // mine body-sse ja tagasta body sisu objektina
+                return result.text();      // tagastiab body stringinga
+            }                           // kogu see function asendatava .then (result => result.json())
+        );
+        console.log(b);
+        b.then(
+            function (result2){             // See annab info välja, siin saab muuta htmli ja panna sinna asju sisse.
+                console.log(result2);
+            }
+        );
     }
 </script>
 </body>

@@ -1,10 +1,14 @@
+body {
+    background: black url("black_tile.png");
+}
+
 h1, h2 {
     text-align: center;
-    color: whitesmoke;
+    color: white;
 }
 
 h2, h3, h4, a, p {
-    color: wheat;
+    color: #E1F5FE;
 }
 
 ul, ol {
@@ -12,8 +16,13 @@ ul, ol {
     color: ghostwhite;
 }
 
-dl {
-    color: ghostwhite;
+::placeholder {
+    color: darkgrey;
+}
+
+td {
+    color: black;
+    width: auto;
 }
 
 input {
@@ -22,6 +31,7 @@ input {
     width: 200px;
     padding: 5px;
     border-radius: 50px;
+    background: white;
 }
 
 .add {
@@ -33,14 +43,18 @@ input {
     margin-bottom: 50px;
     border: 1px solid floralwhite;
     padding: 50px 25px;
-    border-radius: 150px;
+    border-radius: 50px;
+    background: #152238;
+    opacity: 80%;
 }
 
-#historyTable {
+#historyTable, #accountTable, #bankHistoryTable {
     background: whitesmoke;
     color: black;
-    margin-left: 120px;
+    margin-left: auto;
+    margin-right: auto;
     border-radius: 5px;
+    border: 2px solid floralwhite;
 }
 
 #added {
@@ -52,7 +66,9 @@ input {
     margin-bottom: 50px;
     border: 1px solid floralwhite;
     padding: 50px 25px;
-    border-radius: 150px;
+    border-radius: 50px;
+    background: #152238;
+    opacity: 80%;
 }
 
 button {
@@ -60,8 +76,7 @@ button {
     background: dimgrey;
     font-size: 16px;
     color: white;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding: 5px 30px;
 }
 
 select {
@@ -83,10 +98,6 @@ img {
     box-shadow: 0 4px 8px 0 #3D3D3D, 0 6px 20px 0 #3D3D3D;
 }
 
-body {
-    background: black;
-}
-
 div {
     display: block;
     margin-left: auto;
@@ -104,4 +115,8 @@ div {
 
 body {
     text-align: center;
+}
+
+.warning {
+    color: red;
 }
