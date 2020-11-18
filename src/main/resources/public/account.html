@@ -31,9 +31,9 @@
 </div>
 <script>
     let myButton = document.getElementById("enterClientId");
-    let inputId = document.getElementById("clientIdInput").value;
-    myButton.onclick = function getHistory() {
-        alert("client id: " + inputId)
+    myButton.onclick = function () {
+        let inputId = document.getElementById("clientIdInput").value;
+        alert("client id: " + inputId);
         return fetch("http://localhost:8080/Bank2/getHistoryById", {
                 method: 'POST',
                 headers: {'Content-Type':'application/json'},

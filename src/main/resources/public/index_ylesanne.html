@@ -23,6 +23,7 @@
     myButton.onclick = function () {
         let myNumber = document.getElementById("takeNumber").value;
         let myNumberToo = document.getElementById("takeNumberToo").value;
+        alert("You selected numbers " + myNumber + " and " + myNumberToo)
         let myTable = document.getElementById("myTable");
         for (let nr2 = 1; nr2 <= myNumberToo; nr2++) {
             let rowElement = document.createElement("tr");
