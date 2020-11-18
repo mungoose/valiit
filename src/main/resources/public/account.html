@@ -10,7 +10,7 @@
 <h2>Your account information</h2>
 <div class="add">
     <h3>Enter your client id:</h3>
-    <input type="text" id="clientIdInput"><br>
+    <input type="text" id="clientIdInput" placeholder="id#"><br>
     <button id="enterClientId">Submit</button>
     <h2 id="clientName">Welcome: [Client name here]</h2>
     <br>
@@ -31,13 +31,15 @@
 </div>
 <script>
     let myButton = document.getElementById("enterClientId");
-    let clientId = document.getElementById("clientIdInput");
-    myButton.onclick = function getHistory () {
+    let clientId = document.getElementById("clientIdInput").value;
+    myButton.onclick = function getHistory() {
+        alert(clientId)
         return fetch("localhost:8080/Bank2/getHistoryById", {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(clientId)
-        }).then(
+                method: 'POST',
+                headers: {'Content-Type':'application/json'},
+                body: JSON.stringify(clientId)
+            }
+        ).then(
             function (result) {
                 console.log(result);
                 return result.json();
