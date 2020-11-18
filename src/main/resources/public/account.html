@@ -38,12 +38,12 @@
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(clientId)
         }).then(
-            function (result) {                  // result on see, mis tagasi tuleb fetch-iga
+            function (result) {
                 console.log(result);
-                return result.json();           // mine body-sse ja tagasta body sisu objektina
-            }                                   // kogu see function asendatava .then (result => result.json())
+                return result.json();
+            }
         ).then(
-            function (result) {                  // See annab info välja, siin saab muuta htmli ja panna sinna asju sisse.
+            function (result) {
                 console.log(result);
                 let table = document.getElementById("historyTable");
                 for (let i = 0; i < result.length; i++) {
