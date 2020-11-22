@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Transfer money</title>
+    <link rel="stylesheet" href="style.css">
+    <a href="client.html">Add client</a>
+    <a href="addAccount.html">Add account</a>
+    <a href="addMoney.html">Add money</a>
+    <a href="withdrawMoney.html">Withdraw money</a>
+    <a href="transferMoney.html">Transfer money</a>
+    <a href="account.html">Account info</a>
+    <a href="bankHistory.html">Bank history</a>
+    <br>
+    <br>
+</head>
+<body>
+<h1>Bank of the United States of Estonia</h1>
+<h2>Transfer money between accounts</h2>
+<div class="add">
+    <h2>Transfer money</h2>
+    <h3>Insert FROM account nr:</h3>
+    <input id="insertFromAccountNr" type="text" placeholder="Account nr">
+    <br>
+    <h3>Insert TO account nr:</h3>
+    <input id="insertToAccountNr" type="text" placeholder="Account nr">
+    <br>
+    <h3>Insert sum you wish to transfer:</h3>
+    <input id="insertTransferAmount" type="text" placeholder="Amount in">
+    <br>
+    <br>
+    <button type="button" id="addMoney">Submit account</button>
+    <br>
+    <br>
+</div>
+<div id="added">
+    <h3 id="congratulations"></h3>
+</div>
+<script>
+    let myButton = document.getElementById("addMoney");
+    myButton.onclick = function () {
+        let accountFromNr = document.getElementById("insertFromAccountNr").value;
+        let accountToNr = document.getElementById("insertToAccountNr").value;
+        let money = document.getElementById("insertTransferAmount").value;
+        // alert("AccountNr: " + accountFromNr + " | AccountNr2 " + accountToNr + " | sum= " + money);
+        return fetch("http://localhost:8080/Bank2/transfer?fromAccount=" + accountFromNr + "&toAccount="
+            + accountToNr + "&money=" + money,
+            {
+                method: 'POST'
+            }
+        ).then(
+            function () {
+                document.getElementById("congratulations").innerText =
+                    "A sum of " + money + " euros was moved from " + accountFromNr + " to " + accountToNr;
+            }
+        )
+    }
+
+</script>
+</body>
+</html>

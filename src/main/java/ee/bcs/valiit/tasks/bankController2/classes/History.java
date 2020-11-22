@@ -36,7 +36,7 @@ public class History {
         this.sumIn = sumIn;
     }
 
-    public BigDecimal getSumOut(BigDecimal sum_out) {
+    public BigDecimal getSumOut() {
         return sumOut;
     }
 
@@ -52,7 +52,7 @@ public class History {
         this.clientId = clientId;
     }
 
-//    public History(int id, String accountNr) {
+    //    public History(int id, String accountNr) {
 //        this.id = id;
 //        this.accountNr = accountNr;
 //    }

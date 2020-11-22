@@ -4,6 +4,15 @@
     <meta charset="UTF-8">
     <title>Account information</title>
     <link rel="stylesheet" href="style.css">
+    <a href="client.html">Add client</a>
+    <a href="addAccount.html">Add account</a>
+    <a href="addMoney.html">Add money</a>
+    <a href="withdrawMoney.html">Withdraw money</a>
+    <a href="transferMoney.html">Transfer money</a>
+    <a href="account.html">Account info</a>
+    <a href="bankHistory.html">Bank history</a>
+    <br>
+    <br>
 </head>
 <body>
 <h1>Bank of the United States of Estonia</h1>
@@ -11,12 +20,12 @@
 <div class="add">
     <h3>Enter your client id:</h3>
     <input type="number" id="clientIdInput" placeholder="id#"><br>
-    <button id="enterClientId">Submit</button>
-    <h2 id="clientName">Welcome: [Client name here]</h2>
-    <br>
-    <h2>Your current balance is:</h2>
-    <h1 id="balance">[BALANCE HERE]</h1>
-    <h3> euros </h3>
+    <button type="button" id="enterClientId">Submit</button>
+    <h2 id="hello"></h2>
+    <h1 id="clientName"></h1>
+    <h2 id="yourBalanceIs"></h2>
+    <h1 id="balance"></h1>
+    <h3 id="euros"></h3>
 </div>
 <div id="history" class="add">
     <h2>Account history:</h2>
@@ -34,12 +43,7 @@
     myButton.onclick = function () {
         let inputId = document.getElementById("clientIdInput").value;
         // alert("client id: " + inputId);
-        return fetch("http://localhost:8080/Bank2/getHistoryById", {
-                method: 'POST',
-                headers: {'Content-Type':'application/json'},
-                body: JSON.stringify(inputId)
-            }
-        ).then(
+        return fetch("http://localhost:8080/Bank2/getHistoryById?id=" + inputId).then(
             function (result) {
                 console.log(result);
                 return result.json();
@@ -48,6 +52,7 @@
             function (result) {
                 console.log(result);
                 let table = document.getElementById("historyTable");
+                let blankText = " - "
                 for (let i = 0; i < result.length; i++) {
                     let newRow = document.createElement("tr");
                     let newCell1 = document.createElement("td");
@@ -60,9 +65,48 @@
                     newCell3.innerText = result[i].sumOut;
                     newRow.append(newCell3);
                     let newCell4 = document.createElement("td");
-                    newCell4.innerText = " - ";
+                    newCell4.innerText = blankText;
+                    newRow.append(newCell4);
                     table.append(newRow)
                 }
+            }
+        ).then(
+            function () {
+                return fetch("http://localhost:8080/Bank2/getClientNameById?id=" + inputId)
+                    .then(
+                        function (response) {
+                            console.log(response);
+                            return response.json();
+                        }
+                    ).then(
+                        function (response) {
+                            // alert(response.firstName);
+                            document.getElementById("hello").innerText = "Hello!";
+                            document.getElementById("clientName").innerText = response.firstName + " " + response.lastName;
+                        }
+                    )
+            }
+        ).then(
+            function () {
+                return fetch("http://localhost:8080/Bank2/getClientAccounts?id=" + inputId)
+                    .then(
+                        function (answer) {
+                            return answer.json();
+                        }
+                    ).then(
+                        function (answer) {
+                            document.getElementById("yourBalanceIs").innerText = "Your current balance is:"
+                            let sum = 0.00;
+                            let finalBalance = 0.00
+                            for (let i = 0; i < answer.length; i++) {
+                                sum = answer[i].balance;
+                                finalBalance = finalBalance + sum;
+                            }
+                            document.getElementById("balance").innerHTML = finalBalance;
+                            document.getElementById("euros").innerText = "euros"
+                        }
+                    )
+
             }
         );
     }

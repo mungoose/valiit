@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Take money</title>
+    <link rel="stylesheet" href="style.css">
+    <a href="client.html">Add client</a>
+    <a href="addAccount.html">Add account</a>
+    <a href="addMoney.html">Add money</a>
+    <a href="withdrawMoney.html">Withdraw money</a>
+    <a href="transferMoney.html">Transfer money</a>
+    <a href="account.html">Account info</a>
+    <a href="bankHistory.html">Bank history</a>
+    <br>
+    <br>
+</head>
+<body>
+<h1>Bank of the United States of Estonia</h1>
+<h2>Withdraw money from an account</h2>
+<div class="add">
+    <h2>Take money</h2>
+    <h3>Insert account nr:</h3>
+    <input id="insertAccountNr" type="text" placeholder="Account nr">
+    <br>
+    <h3>Insert sum you wish to withdraw:</h3>
+    <input id="insertTakeAmount" type="text" placeholder="Amount in">
+    <br>
+    <br>
+    <button type="button" id="addMoney">Submit account</button>
+    <br>
+    <br>
+</div>
+<div id="added">
+    <h3 id="congratulations"></h3>
+</div>
+<script>
+    let myButton = document.getElementById("addMoney");
+    myButton.onclick = function () {
+        let accountNr = document.getElementById("insertAccountNr").value;
+        let moneyOut = document.getElementById("insertTakeAmount").value;
+        // alert("AccountNr: " + accountNr + " | Sum " + moneyOut);
+        return fetch("http://localhost:8080/Bank2/withdraw?accountNr=" + accountNr + "&out=" + moneyOut,
+            {
+                method: 'POST'
+            }
+        ).then(
+            function () {
+                document.getElementById("congratulations").innerText =
+                    "A sum of " + moneyOut + " euros was taken from " + accountNr;
+            }
+        )
+    }
+
+</script>
+</body>
+</html>

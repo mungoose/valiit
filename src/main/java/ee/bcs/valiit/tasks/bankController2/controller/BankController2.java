@@ -1,14 +1,16 @@
 package ee.bcs.valiit.tasks.bankController2.controller;
 
+import ee.bcs.valiit.tasks.bankController2.classes.Account;
 import ee.bcs.valiit.tasks.bankController2.classes.BankClient;
 import ee.bcs.valiit.tasks.bankController2.classes.History;
+import ee.bcs.valiit.tasks.bankController2.classes.User;
 import ee.bcs.valiit.tasks.bankController2.repository.BankClientRepository;
 import ee.bcs.valiit.tasks.bankController2.service.BankService;
-import liquibase.pro.packaged.C;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 @RequestMapping("Bank2")
@@ -24,24 +26,30 @@ public class BankController2 {
     @CrossOrigin
     @PostMapping("addClient2")
     public BankClient addClient2(String firstName, String lastName) {
-        BankClient saveClient = new BankClient(firstName, lastName);
-        return bankClientRepository.save(saveClient);
+        return bankService.addClient(firstName, lastName);
     }
     // localhost:8080/Bank2/addClient2?firstName=John&lastName=Smith
 
     @CrossOrigin
     @GetMapping("getBalance")
-    public BigDecimal getBalanceByAccountNr(String accountNr){
+    public BigDecimal getBalanceByAccountNr(String accountNr) {
         return bankService.getBalanceByAccountNr(accountNr);
     }
     // localhost:8080/Bank2/getBalance?accountNr=EE22101
 
     @CrossOrigin
-    @GetMapping("getClientAccount")
-    public String getClientAccount(int id) {
-        return bankService.getAccountById(id);
+    @GetMapping("getClientAccounts")
+    public List<Account> getClientAccounts(int id) {
+        return bankService.getAccountsById(id);
     }
-    // localhost:8080/Bank2/getClientAccount?id=2
+    // localhost:8080/Bank2/getClientAccounts?id=15
+
+    @CrossOrigin
+    @GetMapping("getClientNameById")
+    public BankClient getClientNameById(int id) {
+        return bankService.getClientNameById(id);
+    }
+    // localhost:8080/Bank2/getClientNameById?id=3
 
     // Create account by providing client ID and account number
     @CrossOrigin
@@ -64,7 +72,7 @@ public class BankController2 {
     // Withdraw funds from an account by providing account number and withdraw sum
     // Will ignore function if balance is smaller than sum
     @CrossOrigin
-    @GetMapping("withdraw")
+    @PostMapping("withdraw")
     public void withdraw(String accountNr, BigDecimal out) {
         bankService.withdraw(accountNr, out);
     }
@@ -74,7 +82,7 @@ public class BankController2 {
     // Transfer money between accounts by providing from and to accounts and a sum
     // Will ignore function if balance of from account is smaller than money
     @CrossOrigin
-    @GetMapping("transfer")
+    @PostMapping("transfer")
     public void transfer(String fromAccount, String toAccount, BigDecimal money) {
         bankService.transfer(fromAccount, toAccount, money);
     }
@@ -106,5 +114,21 @@ public class BankController2 {
         return bankService.getHistoryById(id);
     }
     // localhost:8080/Bank2/getHistoryById?id=1
+
+
+    @CrossOrigin
+    @PostMapping("register")
+    public List<User> register(@RequestBody User user) {
+        System.out.println(user);
+        List<User> userList = new ArrayList<>();
+        userList.add(user);
+        userList.add(new User("john", "john@smt.com", 33));
+        userList.add(new User("peter", "none", 45));
+        userList.add(new User("john", "john@anotherjohg.com", 53));
+        userList.add(new User("linda", "lindasnad@gag.com", 34));
+        return userList;
+    }
+
+
 }
 

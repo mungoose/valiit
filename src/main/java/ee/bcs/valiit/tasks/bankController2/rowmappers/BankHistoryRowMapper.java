@@ -6,7 +6,7 @@ import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class HistoryRowMapper implements RowMapper<History> {
+public class BankHistoryRowMapper implements RowMapper<History> {
 
     @Override
     public History mapRow(ResultSet resultSet, int i) throws SQLException {

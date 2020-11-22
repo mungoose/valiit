@@ -2,8 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Account information</title>
+    <title>Add account</title>
     <link rel="stylesheet" href="style.css">
+    <a href="client.html">Add client</a>
+    <a href="addAccount.html">Add account</a>
+    <a href="addMoney.html">Add money</a>
+    <a href="withdrawMoney.html">Withdraw money</a>
+    <a href="transferMoney.html">Transfer money</a>
+    <a href="account.html">Account info</a>
+    <a href="bankHistory.html">Bank history</a>
+    <br>
+    <br>
 </head>
 <body>
 <h1>Bank of the United States of Estonia</h1>
@@ -17,27 +26,65 @@
     <input id="insertAccountNr" type="text" placeholder="EE221**">
     <br>
     <br>
-    <button id="myButton">Submit account</button>
+    <button type="button" id="createAccount">Submit account</button>
 </div>
-<div id="accountInfo" class="add">
-    <h2>Account created</h2>
-    <table id="accountTable" border="1" cellpadding="10px" cellspacing="5px">
-        <tr>
-            <td>Account id</td>
-            <td>Account nr</td>
-            <td>Balance</td>
-            <td>Client id</td>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td>EE22101</td>
-            <td>1288.88</td>
-            <td>1</td>
-        </tr>
-    </table>
+<div id="added">
+    <h3 id="congratulations"></h3>
+    <h3 id="accountAdded"></h3>
+    <h2 id="uniqueId"></h2>
+    <h1 id="demo"></h1>
 </div>
 <script>
-
+    let myButton = document.getElementById("createAccount");
+    myButton.onclick = function () {
+        let clientId = document.getElementById("insertClientId").value;
+        let accountNr = document.getElementById("insertAccountNr").value;
+        // alert("Client ID: " + clientId + " Client Account nr " + accountNr);
+        return fetch("http://localhost:8080/Bank2/createAccount?id=" + clientId + "&accountNr=" + accountNr,
+            {
+                method: 'POST'
+            }
+        ).then(
+            function () {
+                // console.log(response)
+                document.getElementById("congratulations").innerText =
+                    "Account nr " + accountNr + " for client with the id nr " + clientId + " successfully added!";
+                // document.getElementById("clientAdded").innerText = "Your are now our client.";
+                // document.getElementById("uniqueId").innerText = "Your unique ID is:";
+            }
+        )
+    }
+    // .then(
+    //         function () {
+    //             fetch("http://localhost:8080/Bank2/getClientAccount?id=" + clientId
+    //             ).then(response => response.json()
+    //             ).then(
+    //                 function (response) {
+    //                     console.log(response)
+    //                     let table = document.getElementById("accountTable");
+    //                     for (let i = 0; i < response.length; i++) {
+    //                         let newRow = document.createElement("tr");
+    //                         let newCell1 = document.createElement("td");
+    //                         newCell1.innerText = response[i].id
+    //                         newRow.append(newCell1);
+    //                         let newCell2 = document.createElement("td");
+    //                         newCell2.innerText = response[i].accountNr;
+    //                         newRow.append(newCell2);
+    //                         let newCell3 = document.createElement("td");
+    //                         newCell3.innerText = response[i].balance;
+    //                         newRow.append(newCell3);
+    //                         let newCell4 = document.createElement("td");
+    //                         newCell4.innerText = response[i].clientId;
+    //                         newRow.append(newCell4);
+    //                         table.append(newRow)
+    //                     }
+    //                 }
+    //             )
+    //
+    //         }
+    //     )
+    //         ;
+    // }
 </script>
 </body>
 </html>

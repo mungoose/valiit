@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add money</title>
+    <link rel="stylesheet" href="style.css">
+    <a href="client.html">Add client</a>
+    <a href="addAccount.html">Add account</a>
+    <a href="addMoney.html">Add money</a>
+    <a href="withdrawMoney.html">Withdraw money</a>
+    <a href="transferMoney.html">Transfer money</a>
+    <a href="account.html">Account info</a>
+    <a href="bankHistory.html">Bank history</a>
+    <br>
+    <br>
+</head>
+<body>
+<h1>Bank of the United States of Estonia</h1>
+<h2>Add money to an account</h2>
+<div class="add">
+    <h2>Add money</h2>
+    <h3>Insert account nr:</h3>
+    <input id="insertAccountNr" type="text" placeholder="Account nr">
+    <br>
+    <h3>Insert sum you wish to add:</h3>
+    <input id="insertAddAmount" type="text" placeholder="Amount in">
+    <br>
+    <br>
+    <button type="button" id="addMoney">Submit account</button>
+    <br>
+    <br>
+</div>
+<div id="added">
+    <h3 id="congratulations"></h3>
+</div>
+<script>
+    let myButton = document.getElementById("addMoney");
+    myButton.onclick = function () {
+        let accountNr = document.getElementById("insertAccountNr").value;
+        let moneyIn = document.getElementById("insertAddAmount").value;
+        // alert("Client ID: " + clientId + " Client Account nr " + accountNr);
+        return fetch("http://localhost:8080/Bank2/addAmount?accountNr=" + accountNr + "&in=" + moneyIn,
+            {
+                method: 'POST'
+            }
+        ).then(
+            function () {
+                document.getElementById("congratulations").innerText =
+                    "A sum of " + moneyIn + " euros was added to " + accountNr;
+            }
+        )
+    }
+</script>
+</body>
+</html>

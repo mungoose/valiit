@@ -4,6 +4,15 @@
     <meta charset="UTF-8">
     <title>Account information</title>
     <link rel="stylesheet" href="style.css">
+    <a href="client.html">Add client</a>
+    <a href="addAccount.html">Add account</a>
+    <a href="addMoney.html">Add money</a>
+    <a href="withdrawMoney.html">Withdraw money</a>
+    <a href="transferMoney.html">Transfer money</a>
+    <a href="account.html">Account info</a>
+    <a href="bankHistory.html">Bank history</a>
+    <br>
+    <br>
 </head>
 <body>
 <h1>Bank of the United States of Estonia</h1>
@@ -12,6 +21,11 @@
     <h2>View bank history</h2>
     <br>
     <button id="getHistoryButton">Get history</button>
+    <br>
+    <br>
+    <h2 id="yourBalanceIs"></h2>
+    <h1 id="balance"></h1>
+    <h3 id="euros"></h3>
 </div>
 <div id="bankHistoryInfo" class="add">
     <h2>Bank history</h2>
@@ -29,16 +43,16 @@
     let myButton = document.getElementById("getHistoryButton");
     myButton.onclick = function () {
         fetch("http://localhost:8080/Bank2/getHistory").then(
-            function (result){                  // result on see, mis tagasi tuleb fetch-iga
+            function (result) {                  // result on see, mis tagasi tuleb fetch-iga
                 console.log(result);
                 return result.json();           // mine body-sse ja tagasta body sisu objektina
                 //return result.text();         // tagastiab body stringinga
             }                                   // kogu see function asendatava .then (result => result.json())
         ).then(
-            function (result){                  // See annab info välja, siin saab muuta htmli ja panna sinna asju sisse.
+            function (result) {                  // See annab info välja, siin saab muuta htmli ja panna sinna asju sisse.
                 console.log(result);
                 let table = document.getElementById("bankHistoryTable");
-                for (let i = 0; i < result.length; i++){
+                for (let i = 0; i < result.length; i++) {
                     let newRow = document.createElement("tr");
                     let newCell1 = document.createElement("td");
                     newCell1.innerText = result[i].id
@@ -57,6 +71,15 @@
                     newRow.append(newCell5);
                     table.append(newRow)
                 }
+                document.getElementById("yourBalanceIs").innerText = "Bank's current balance is:"
+                let sum = 0.00;
+                let finalBalance = 0.00
+                for (let i = 0; i < result.length; i++) {
+                    sum = result[i].sumIn + result[i].sumOut;
+                    finalBalance = finalBalance + sum;
+                }
+                document.getElementById("balance").innerHTML = finalBalance;
+                document.getElementById("euros").innerText = "euros"
             }
         );
     }

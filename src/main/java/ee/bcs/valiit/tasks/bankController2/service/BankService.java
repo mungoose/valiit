@@ -1,9 +1,12 @@
 package ee.bcs.valiit.tasks.bankController2.service;
 
+import ee.bcs.valiit.tasks.bankController2.classes.Account;
+import ee.bcs.valiit.tasks.bankController2.classes.BankClient;
 import ee.bcs.valiit.tasks.bankController2.exceptions.ApplicationException;
 import ee.bcs.valiit.tasks.bankController2.classes.History;
 import ee.bcs.valiit.tasks.bankController2.repository.BankAccountRepository;
 import ee.bcs.valiit.tasks.bankController2.repository.BankClientRepository;
+import ee.bcs.valiit.tasks.bankController2.repository.BankClientRepository2;
 import ee.bcs.valiit.tasks.bankController2.repository.BankHistoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,14 +20,17 @@ public class BankService {
     @Autowired
     private BankClientRepository bankClientRepository;
     @Autowired
+    private BankClientRepository2 bankClientRepository2;
+    @Autowired
     private BankAccountRepository bankAccountRepository;
     @Autowired
     private BankHistoryRepository bankHistoryRepository;
 
     // Add client by defining first name and last name. SQL will assign unique id
-//    public void addClient(String firstName, String lastName) {
-//        bankClientRepository.addClient(firstName, lastName);
-//    }
+    public BankClient addClient(String firstName, String lastName) {
+        BankClient saveClient = new BankClient(firstName, lastName);
+        return bankClientRepository.save(saveClient);
+    }
 
 
 
@@ -52,7 +58,7 @@ public class BankService {
         bankAccountRepository.setBalance(accountNr, balance.add(in));
 
         // Add money and add to bank history
-        bankAccountRepository.addToHistoryIn(accountNr, balance.add(in));
+        bankHistoryRepository.addToHistoryIn(accountNr, balance.add(in));
 
     }
 
@@ -70,7 +76,7 @@ public class BankService {
             bankAccountRepository.setBalance(accountNr, sum);
 
             // Add to bank history
-            bankAccountRepository.addToHistoryOut(accountNr, out.negate());
+            bankHistoryRepository.addToHistoryOut(accountNr, out.negate());
         } else {
             // If funds are smaller than requested money ("out"), throw exception with message
             throw new ApplicationException("Not enough money!");
@@ -95,9 +101,9 @@ public class BankService {
             bankAccountRepository.setBalance(toAccount, balanceTo.add(money));
 
             // Add fromAccount transaction to bank history
-            bankAccountRepository.addToHistoryOut(fromAccount, money.negate());
+            bankHistoryRepository.addToHistoryOut(fromAccount, money.negate());
             // Add toAccount transaction to bank history
-            bankAccountRepository.addToHistoryIn(toAccount, money);
+            bankHistoryRepository.addToHistoryIn(toAccount, money);
         } else {
             throw new ApplicationException("Not enough money to transfer!");
         }
@@ -119,9 +125,12 @@ public class BankService {
     }
 
     // Get account by client ID
-    public String getAccountById(int id) {
-        return bankHistoryRepository.getAccountNrByID(id);
+    public List<Account> getAccountsById(int id) {
+        return bankAccountRepository.getAccountNrsByID(id);
     }
+
+    // Get client name by client ID
+    public BankClient getClientNameById(int id) {return bankClientRepository2.getClientNameById(id);}
 
     // Get balance by account nr
     public BigDecimal getBalanceByAccountNr(String accountNr){

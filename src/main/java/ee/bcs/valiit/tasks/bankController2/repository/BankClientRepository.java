@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface BankClientRepository extends JpaRepository<BankClient, Integer> {
-//    List<BankClient> findAllBy(String lastName);
+
 }
